@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --primary: 250 84% 54%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 250 30% 96%;
+    --secondary-foreground: 250 84% 38%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    --accent: 220 100% 60%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 250 84% 54%;
+    
+    --radius: 0.75rem;
+  }
+  
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 250 84% 54%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 220 100% 60%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
+  
+  img {
+    @apply transition-all duration-300;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  .glass {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-sm;
+  }
+  
+  .container {
+    @apply px-4 md:px-6 max-w-[1400px] mx-auto;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Enhanced scrollbar styles - global */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary/50 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full border-2 border-transparent border-solid bg-clip-padding hover:bg-primary/30 transition-colors;
+  }
+  
+  /* Thinner scrollbars for form elements and smaller containers */
+  .form-container::-webkit-scrollbar,
+  textarea::-webkit-scrollbar,
+  select::-webkit-scrollbar,
+  .dialog-body::-webkit-scrollbar,
+  [role="dialog"]::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  /* Admin panel scrollbars - slightly more visible */
+  .admin-scroll::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 hover:bg-primary/50;
+  }
+  
+  /* Firefox specific scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.2) hsl(var(--secondary) / 0.5);
+  }
+  
+  .admin-scroll {
+    scrollbar-color: hsl(var(--primary) / 0.3) hsl(var(--secondary) / 0.5);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors 
+    focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none 
+    disabled:opacity-50 h-9 px-4 py-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground shadow hover:bg-primary/90;
+  }
+  
+  .btn-outline {
+    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .heading-xl {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+  
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+  
+  .heading-md {
+    @apply text-2xl md:text-3xl font-bold tracking-tight;
+  }
+  
+  .heading-sm {
+    @apply text-xl md:text-2xl font-semibold tracking-tight;
+  }
+  
+  .animate-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sharper dialogs and modals */
+  [role="dialog"] {
+    @apply shadow-xl;
+    transform: translateZ(0);
+  }
+  
+  /* Improved form elements */
+  .form-group {
+    @apply space-y-2;
+  }
+  
+  /* Sharper images in product admin interface */
+  .product-image {
+    @apply object-cover rounded border;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  
+  /* Admin panel specific classes */
+  .admin-content {
+    @apply admin-scroll overflow-y-auto overflow-x-hidden;
+    max-height: calc(100vh - 120px);
+  }
+  
+  .form-container {
+    @apply rounded-lg bg-white shadow-sm border border-border/50 p-4;
+  }
+
+  /* New gradient backgrounds */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-accent;
+  }
+
+  .bg-gradient-light {
+    @apply bg-gradient-to-r from-secondary/80 to-secondary;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+}
